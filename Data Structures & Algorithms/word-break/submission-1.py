@@ -1,0 +1,16 @@
+from functools import cache
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        wordSet = set(wordDict)
+        @cache
+        def dfs(i):
+            if i == len(s):
+                return True
+            for j in range(i, len(s)):
+                if s[i : j+ 1] in wordSet and dfs(j+1):
+                    return True
+            return False
+
+
+        return dfs(0)
